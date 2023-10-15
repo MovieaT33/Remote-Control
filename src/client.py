@@ -14,7 +14,7 @@ def get_last_message(delay: float, debug: bool = True) -> str:
         print(datetime.datetime.now())
     print("Task starting...")
 
-    if 1:
+    while True:
         time.sleep(delay)
         new_db_original = db.get_db(DOMEN, data={**DATA}, debug=debug)
         if debug:
@@ -34,7 +34,7 @@ def main(delay: float, debug: bool = True) -> None:
     print("Creating task...")
     get_message_task = Task(target=get_last_message, args=[delay,
                                                            debug])
-    get_message_task.task.start()
+    get_message_task.start()
 
     run = True
     while run:
