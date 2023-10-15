@@ -1,8 +1,8 @@
-DOMEN = "https://movieat33.pythonanywhere.com"
-USERNAME = "Kolya"
-USER_PASSWORD = "Kolya"
-DB_NAME = "rmcn"
-PASSWORD = "rmcn"
+DOMEN = "https://..."
+USERNAME = "..."
+USER_PASSWORD = "..."
+DB_NAME = "..."
+PASSWORD = "..."
 DATA = {
     "username": USERNAME,
     "user_password": USER_PASSWORD,
