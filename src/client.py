@@ -22,7 +22,7 @@ def get_last_message(delay: float, debug: bool = True) -> str:
         if database != new_db_original:
             new_db = new_db_original.splitlines()
             new_db = new_db[len(new_db) - 1]
-            message = json.loads(new_db)["message"]
+            message = json.loads(new_db)["msg"]
             print("Last command (must be server message):", end=" ")
             print(f"\033[34m[\033[0m{message}\033[34m]\033[0m")
             database = new_db_original
@@ -40,7 +40,7 @@ def main(delay: float, debug: bool = True) -> None:
     while run:
         try:
             message = input("\033[32m>\033[0m: ")
-            db.receive_a_new_message(DOMEN, data={**DATA, "message": message},
+            db.receive_a_new_message(DOMEN, data={**DATA, "msg": message},
                                      debug=debug)
         except KeyboardInterrupt:
             get_message_task.stop()
