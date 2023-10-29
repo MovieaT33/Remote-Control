@@ -18,12 +18,12 @@ def commnad_run(command: str, debug: bool = True) -> None:
         result: str = subprocess.check_output(command, shell=True, text=True)
     except subprocess.CalledProcessError as error:
         message = f"\033[31mInternal server error\033[0m {error}"
-        db.receive_a_new_message(DOMEN, data={**DATA, "message": message})
+        db.receive_a_new_message(DOMEN, data={**DATA, "msg": message})
         print(message)
         return
 
     print("Recieving data...")
-    db.receive_a_new_message(DOMEN, data={**DATA, "message": result})
+    db.receive_a_new_message(DOMEN, data={**DATA, "msg": result})
     print("""Complete with status ^
                      |""")
     if debug:
@@ -49,7 +49,7 @@ def main(debug: bool = True) -> None:
         if database != new_db_original:
             new_db = new_db_original.splitlines()
             new_db = new_db[len(new_db) - 1]
-            command = json.loads(new_db)["message"]
+            command = json.loads(new_db)["msg"]
             print(f"Command: \033[34m[\033[0m{command}\033[34m]\033[0m")
 
             try:
