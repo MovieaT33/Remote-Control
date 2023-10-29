@@ -1,11 +1,11 @@
-DOMEN = "https://..."
-USERNAME = "..."
-USER_PASSWORD = "..."
-DB_NAME = "..."
-PASSWORD = "..."
-DATA = {
+DOMEN: str = "..."
+USERNAME: str = "..."
+USER_PASSWD: str = "..."
+FILENAME: str = "..."
+FILE_PASSWD: str = "..."
+DATA: dict[str, str] = {
     "username": USERNAME,
-    "user_password": USER_PASSWORD,
-    "db_name": DB_NAME,
-    "password": PASSWORD,
+    "user_passwd": USER_PASSWD,
+    "filename": FILENAME,
+    "file_passwd": FILE_PASSWD,
 }
