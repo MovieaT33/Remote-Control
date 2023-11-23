@@ -7,18 +7,16 @@ from task import Task
 from settings import DOMEN, DATA
 
 
-def get_last_message(delay: float, debug: bool = True) -> str:
+def get_last_message(delay: float) -> str:
     print("Task initialization...")
-    database = db.get_db(DOMEN, data={**DATA}, debug=debug)
-    if debug:
-        print(datetime.datetime.now())
+    database = db.get_file(DOMEN, {**DATA})
+    print(datetime.datetime.now())
     print("Task starting...")
 
     while True:
         time.sleep(delay)
-        new_db_original = db.get_db(DOMEN, data={**DATA}, debug=debug)
-        if debug:
-            print(datetime.datetime.now())
+        new_db_original = db.get_file(DOMEN, {**DATA})
+        print(datetime.datetime.now())
         if database != new_db_original:
             new_db = new_db_original.splitlines()
             new_db = new_db[len(new_db) - 1]
@@ -26,11 +24,10 @@ def get_last_message(delay: float, debug: bool = True) -> str:
             print("Last command (must be server message):", end=" ")
             print(f"\033[34m[\033[0m{message}\033[34m]\033[0m")
             database = new_db_original
-            if debug:
-                print(datetime.datetime.now())
+            print(datetime.datetime.now())
 
 
-def main(delay: float, debug: bool = True) -> None:
+def main(delay: float) -> None:
     print("Creating task...")
     get_message_task = Task(target=get_last_message, args=[delay,
                                                            debug])
@@ -40,8 +37,7 @@ def main(delay: float, debug: bool = True) -> None:
     while run:
         try:
             message = input("\033[32m>\033[0m: ")
-            db.receive_a_new_message(DOMEN, data={**DATA, "msg": message},
-                                     debug=debug)
+            db.send_msg(DOMEN, {**DATA, "msg": message})
         except KeyboardInterrupt:
             get_message_task.stop()
             sys.exit()
