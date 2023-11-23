@@ -1,8 +1,8 @@
+from typing import Dict
 import requests
 
 
-def receive_a_new_message(domen: str, data: dict[str, str], debug: bool = True) -> str:
-    response = requests.get(f"{domen}/api/v0/send_msg", params=data)
-    if debug:
-        print("INFO:", response.status_code)
+def send_msg: str, params: Dict[str, str]) -> str:
+    response: requests.models.Response = requests.get(f"{domen}/api/v0/send_msg", params=params)
+    print(f"[HTTP] {response.status_code}")
     return response.text
