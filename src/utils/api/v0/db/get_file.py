@@ -1,8 +1,8 @@
+from typing import Dict
 import requests
 
 
-def get_db(domen: str, data: dict[str, str], debug: bool = True) -> str:
-    response = requests.get(f"{domen}/api/v0/get_file", params=data)
-    if debug:
-        print("INFO:", response.status_code)
+def get_file(domen: str, params: Dict[str, str]) -> str:
+    response: requests.models.Response = requests.get(f"{domen}/api/v0/get_file", params=params)
+    print(f"[HTTP] {response.status_code}")
     return response.text
