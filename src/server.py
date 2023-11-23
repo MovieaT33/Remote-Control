@@ -18,34 +18,31 @@ def commnad_run(command: str, debug: bool = True) -> None:
         result: str = subprocess.check_output(command, shell=True, text=True)
     except subprocess.CalledProcessError as error:
         message = f"\033[31mInternal server error\033[0m {error}"
-        db.receive_a_new_message(DOMEN, data={**DATA, "msg": message})
+        db.send_msg(DOMEN, {**DATA, "msg": message})
         print(message)
         return
 
     print("Recieving data...")
-    db.receive_a_new_message(DOMEN, data={**DATA, "msg": result})
+    db.send_msg(DOMEN, {**DATA, "msg": result})
     print("""Complete with status ^
                      |""")
-    if debug:
-        print(datetime.datetime.now())
+    print(datetime.datetime.now())
 
 
-def main(debug: bool = True) -> None:
+def main() -> None:
     print("Initialization...")
     id = 1
     print(f"My id {id}")
     delay = 1.0  # float(input('Delay (in seconds): '))
-    database = db.get_db(DOMEN, data={**DATA}, debug=debug)
-    if debug:
-        print(datetime.datetime.now())
+    database = db.get_file(DOMEN, {**DATA})
+    print(datetime.datetime.now())
     print("Starting...")
 
     run = True
     while run:
         time.sleep(delay)
-        new_db_original = db.get_db(DOMEN, data={**DATA}, debug=debug)
-        if debug:
-            print(datetime.datetime.now())
+        new_db_original = db.get_file(DOMEN, {**DATA})
+        print(datetime.datetime.now())
         if database != new_db_original:
             new_db = new_db_original.splitlines()
             new_db = new_db[len(new_db) - 1]
@@ -62,9 +59,8 @@ def main(debug: bool = True) -> None:
             except IndexError as error:
                 print("\n".join(traceback.format_exception(error)))
 
-            database = db.get_db(DOMEN, data={**DATA}, debug=debug)
-            if debug:
-                print(datetime.datetime.now())
+            database = db.get_filr(DOMEN, {**DATA})
+            print(datetime.datetime.now())
 
 
 if __name__ == "__main__":
