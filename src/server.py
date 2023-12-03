@@ -59,7 +59,7 @@ def main() -> None:
             except IndexError as error:
                 print("\n".join(traceback.format_exception(error)))
 
-            database = db.get_filr(DOMEN, {**DATA})
+            database = db.get_file(DOMEN, {**DATA})
             print(datetime.datetime.now())
 
 
