@@ -33,7 +33,7 @@ def main() -> None:
     print("Initialization...")
     id = 1
     print(f"My id {id}")
-    delay = 1.0  # float(input('Delay (in seconds): '))
+    delay = 1.0  # if you can call the input function, use float(input("Delay (in seconds): "))
     database = db.get_file(DOMEN, {**DATA})
     print(datetime.datetime.now())
     print("Starting...")
