@@ -51,8 +51,6 @@ if __name__ == "__main__":
     else:
         debug = False
 
-    print("Ok", debug)
-
     if input("Do you want to set delay [y/N]?").lower() in true_list:
         delay = float(input("Delay (in seconds): "))
     else:
